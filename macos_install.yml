@@ -1,0 +1,16 @@
+---
+- name: MacOS Local Provisioner
+  hosts: localhost
+  become: no
+  gather_facts: no
+  roles:
+    # App Installations
+    - brew
+    # Configurations
+    - git
+    #- vim
+    - xenv
+    - bash
+    - vscode
+    # macOS default
+    - macos

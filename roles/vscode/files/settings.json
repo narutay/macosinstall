@@ -1,0 +1,40 @@
+{
+    "git.autofetch": true,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+    "files.trimTrailingWhitespace": true,
+    "window.zoomLevel": -1,
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo"
+                }
+            ]
+        }
+    ],
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
+    "explorer.confirmDelete": false
+}

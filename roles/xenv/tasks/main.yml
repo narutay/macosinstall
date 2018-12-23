@@ -1,0 +1,20 @@
+#
+# install pyenv and nodenv
+#
+- name: install env packages
+  homebrew:
+    name:
+      - pyenv
+      - nodenv
+    state: present
+
+- name: add init command to bash_profile
+  lineinfile:
+    dest: ~/.bash_profile
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "#pyenv"
+    - "eval \"$(pyenv init -)\""
+    - "#nodeenv"
+    - "eval \"$(nodenv init -)\""

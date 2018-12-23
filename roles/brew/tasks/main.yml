@@ -1,0 +1,87 @@
+#
+# homebrew
+#
+- name: update homebrew
+  homebrew:
+    update_homebrew: yes
+
+- name: add homebrew tap repos
+  homebrew_tap:
+    tap: "{{ item }}"
+    state: present
+  with_items:
+    - caskroom/cask
+    - caskroom/versions
+
+- name: install homebrew packages
+  homebrew:
+    name:
+      - mas
+      - vim
+      - iperf
+      - wakeonlan
+      - wget
+      - coreutils
+      - gzip
+      - gawk
+      - heroku
+      - jq
+      - tree
+    state: present
+
+- name: install homebrew packages with default name
+  homebrew:
+    name:
+      - findutils
+      - grep
+      - gnu-sed
+      - gnu-tar
+    state: present
+    install_options: with-default-names
+
+#
+# homebrew cask
+#
+- name: install homebrew cask packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - appcleaner
+    - google-chrome
+    - google-japanese-ime
+    - wireshark
+    - virtualbox
+    - vagrant
+    - docker
+    - bathyscaphe
+    - cooviewer
+    - torbrowser
+    - vlc
+    - xquartz
+    - vnc-viewer
+    - bettertouchtool
+    - ibm-cloud-cli
+
+#
+# mas
+#
+- name: mas get installed list
+  shell: mas list
+  register: mas_installed_list
+  changed_when: False
+  check_mode: no
+
+- name: mas install items
+  shell: "mas install {{ item }}"
+  with_items:
+    - 497799835 #Xcode
+    - 409203825 #Numbers
+    - 409183694 #Keynote
+    - 409201541 #Pages
+    - 715768417 #Microsoft Remote Desktop
+    - 803453959 #Slack
+  when: (item|string) not in mas_installed_list.stdout
+
+- name: mas upgrade
+  shell: "mas upgrade"

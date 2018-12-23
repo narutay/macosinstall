@@ -1,0 +1,178 @@
+- name: setup osx defaults
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    # バッテリー残量を％表記に
+    - {
+      domain: com.apple.menuextra.battery,
+      key: ShowPercent,
+      type: string,
+      value: "YES",
+    }
+    # 日付と時刻のフォーマット（24時間表示、秒表示あり、日付・曜日を表示）
+    - {
+      domain: com.apple.menuextra.clock,
+      key: DateFormat,
+      type: string,
+      value: "M\u6708d\u65e5(EEE)  H:mm:ss",
+    }
+    ##
+    # Finder
+    ##
+    # 新しいウィンドウでデフォルトでホームフォルダを開く
+    - {
+      domain: com.apple.finder,
+      key: NewWindowTarget,
+      type: string,
+      value: PfDe,
+    }
+    #- {
+    #  domain: com.apple.finder,
+    #  key: NewWindowTargetPath,
+    #  type: string,
+    #  value: "{{ ansible_user_dir }}",
+    #}
+    # デフォルトはカラムビュー表示
+    - {
+      domain: write com.apple.finder,
+      key: FXPreferredViewStyle,
+      type: string,
+      value: clmv,
+    }
+    # ステータスバーを表示
+    - {
+      domain: com.apple.finder,
+      key: ShowStatusBar,
+      type: bool,
+      value: true,
+    }
+    # タイトルバーにフルパスを表示
+    - {
+      domain: com.apple.finder,
+      key: _FXShowPosixPathInTitle,
+      type: bool,
+      value: true,
+    }
+    # パスバーを表示
+    - {
+      domain: com.apple.finder,
+      key: ShowPathbar,
+      type: bool,
+      value: true,
+    }
+    # 隠しファイルや隠しフォルダを表示
+    - {
+      domain: com.apple.finder,
+      key: AppleShowAllFiles,
+      type: bool,
+      value: true,
+    }
+
+    ##
+    # Trackpad
+    ##
+    # タップでクリック
+    - {
+      domain: com.apple.driver.AppleBluetoothMultitouch.trackpad,
+      key: Clicking,
+      type: int,
+      value: 1,
+    }
+
+    ##
+    # Dock
+    ##
+    # Dockを自動的に隠さない
+    - {
+      domain: com.apple.dock,
+      key: autohide,
+      type: bool,
+      value: false,
+    }
+    # 拡大を有効にする
+    - {
+      domain: com.apple.dock,
+      key: magnification,
+      type: bool,
+      value: true,
+    }
+    # Dockの位置を下によせる
+    - {
+      domain: com.apple.dock,
+      key: orientation,
+      type: string,
+      value: "bottom",
+    }
+    # 通常サイズ
+    - {
+      domain: com.apple.dock,
+      key: tilesize,
+      type: float,
+      value: 32,
+    }
+    - {
+      domain: com.apple.dock,
+      key: largesize,
+      type: float,
+      value: 56,
+    }
+    - {
+      domain: com.apple.dock,
+      key: minimize-to-application,
+      type: bool,
+      value: true,
+    }
+    - {
+      domain: com.apple.dock,
+      key: mineffect,
+      type: string,
+      value: "scale",
+    }
+
+- name: setup osx defaults with global
+  osx_defaults:
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    # リピート入力認識までの時間
+    - {
+      key: InitialKeyRepeat,
+      type: int,
+      value: 15,
+    }
+    # キーのリピート
+    - {
+      key: KeyRepeat,
+      type: int,
+      value: 2,
+    }
+    # 拡張子を常に表示
+    - {
+      key: AppleShowAllExtensions,
+      type: bool,
+      value: true,
+    }
+    # 保存ダイアログを詳細設定で表示
+    - {
+      key: NSNavPanelExpandedStateForSaveMode,
+      type: bool,
+      value: true,
+    }
+    # ファイルの保存場所のデフォルトをiCloud以外にする
+    - {
+      key: NSDocumentSaveNewDocumentsToCloud,
+      type: bool,
+      value: true,
+    }
+    # Fuキーを標準のファンクションキーとして使用
+    - {
+      key: com.apple.keyboard.fnState,
+      type: bool,
+      value: true,
+    }

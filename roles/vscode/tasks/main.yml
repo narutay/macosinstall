@@ -1,0 +1,41 @@
+- name: install vscode packages
+  homebrew_cask:
+    name: visual-studio-code
+    state: present
+
+- name: visual studio code basic setting
+  copy:
+    src: settings.json
+    dest: "~/Library/Application Support/Code/User"
+    mode: 0644
+
+- name: code get installed list
+  shell: code --list-extensions
+  register: code_installed_list
+  changed_when: False
+  check_mode: no
+
+- name: visual studio code install extension
+  raw: "code --install-extension {{ item }}"
+  with_items:
+    - MS-CEINTL.vscode-language-pack-ja
+    - vscodevim.vim
+    - CoenraadS.bracket-pair-colorizer
+    - mechatroner.rainbow-csv
+    - IBM.output-colorizer
+    - ionutvmi.path-autocomplete
+    - mikestead.dotenv
+    - mrmlnc.vscode-pugbeautify
+    - dbaeumer.vscode-eslint
+    - eamodio.gitlens
+    - donjayamanne.githistory
+    - eg2.vscode-npm-script
+    - gogocrow.webpack-snippets
+    - HookyQR.beautify
+    - joelday.docthis
+    - michelemelluso.code-beautifier
+    - ms-python.python
+    - ms-vscode.cpptools
+    - msjsdiag.debugger-for-chrome
+    - vscoss.vscode-ansible
+  when: item not in code_installed_list.stdout
