@@ -1,0 +1,30 @@
+- name: install homebrew packages
+  homebrew:
+    name:
+      - ansible
+      - awscli
+      - terraform
+      - tflint
+
+- name: install homebrew cask packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - google-cloud-sdk
+
+- name: create zshrc
+  file:
+    path: ~/.zshrc
+    state: touch
+    mode: 0600
+
+- name: add alias
+  lineinfile:
+    dest: ~/.zshrc
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "# gcloud"
+    - "source {{ ansible_user_dir }}/google-cloud-sdk/path.zsh.inc"
+    - "source {{ ansible_user_dir }}/google-cloud-sdk/completion.zsh.inc"

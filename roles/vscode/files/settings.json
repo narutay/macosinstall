@@ -4,37 +4,93 @@
     "editor.wordWrap": "on",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": -1,
-    "vim.otherModesKeyBindingsNonRecursive": [
-        {
+    "vim.normalModeKeyBindingsNonRecursive": [{
             "before": [
                 "u"
             ],
             "after": [],
-            "commands": [
-                {
-                    "command": "undo"
-                }
-            ]
+            "commands": [{
+                "command": "undo"
+            }]
         },
         {
             "before": [
                 "<C-r>"
             ],
             "after": [],
-            "commands": [
-                {
-                    "command": "redo"
-                }
-            ]
+            "commands": [{
+                "command": "redo"
+            }]
         }
     ],
+    "vim.hlsearch": true,
+    "vim.foldfix": true,
+    "vim.visualstar": true,
+    "editor.snippetSuggestions": "top",
+    "editor.tabCompletion": "on",
+    "files.autoGuessEncoding": true,
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
-    "gitlens.historyExplorer.enabled": true,
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "editor.renderControlCharacters": true,
+    "yaml.customTags": [
+        "!And",
+        "!If",
+        "!Not",
+        "!Equals",
+        "!Or",
+        "!FindInMap",
+        "!Base64",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Select",
+        "!Split",
+        "!Join",
+        "!And sequence",
+        "!If sequence",
+        "!Not sequence",
+        "!Equals sequence",
+        "!Or sequence",
+        "!FindInMap sequence",
+        "!Join sequence",
+        "!Sub sequence",
+        "!ImportValue sequence",
+        "!Select sequence",
+        "!Split sequence"
+    ],
+    "yaml.format.enable": true,
+    "editor.suggestSelection": "first",
+    "explorer.confirmDragAndDrop": false,
+    "cfnLint.ignoreRules": [
+        "W3010"
+    ],
+    "yaml.validate": false,
+    "[python]": {},
+    "terraform.indexing": {
+        "enabled": false,
+        "liveIndexing": false,
+        "delay": 500,
+        "exclude": [
+            ".terraform/**/*",
+            "**/.terraform/**/*"
+        ]
+    },
+    "terraform.languageServer": {
+        "enabled": true,
+        "args": []
+    },
+    "editor.formatOnSave": true,
+    "plantuml.server": "https://plantuml.tools.gke.bdidev.net",
+    "plantuml.render": "PlantUMLServer",
+    "terraform.codelens.enabled": false,
+    "go.useLanguageServer": true
 }

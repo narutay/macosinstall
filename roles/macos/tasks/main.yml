@@ -30,12 +30,12 @@
       type: string,
       value: PfDe,
     }
-    #- {
-    #  domain: com.apple.finder,
-    #  key: NewWindowTargetPath,
-    #  type: string,
-    #  value: "{{ ansible_user_dir }}",
-    #}
+    - {
+      domain: com.apple.finder,
+      key: NewWindowTargetPath,
+      type: string,
+      value: "{{ ansible_user_dir }}",
+    }
     # デフォルトはカラムビュー表示
     - {
       domain: write com.apple.finder,

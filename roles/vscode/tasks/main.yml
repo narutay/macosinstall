@@ -5,9 +5,12 @@
 
 - name: visual studio code basic setting
   copy:
-    src: settings.json
+    src: "{{ item }}"
     dest: "~/Library/Application Support/Code/User"
     mode: 0644
+  with_items:
+    - settings.json
+    - locale.json
 
 - name: code get installed list
   shell: code --list-extensions
@@ -18,24 +21,42 @@
 - name: visual studio code install extension
   raw: "code --install-extension {{ item }}"
   with_items:
+    # Common
+    - HookyQR.beautify
     - MS-CEINTL.vscode-language-pack-ja
-    - vscodevim.vim
-    - CoenraadS.bracket-pair-colorizer
-    - mechatroner.rainbow-csv
-    - IBM.output-colorizer
-    - ionutvmi.path-autocomplete
-    - mikestead.dotenv
-    - mrmlnc.vscode-pugbeautify
-    - dbaeumer.vscode-eslint
+    - jebbs.plantuml
     - eamodio.gitlens
     - donjayamanne.githistory
-    - eg2.vscode-npm-script
-    - gogocrow.webpack-snippets
-    - HookyQR.beautify
-    - joelday.docthis
-    - michelemelluso.code-beautifier
-    - ms-python.python
-    - ms-vscode.cpptools
+    - mechatroner.rainbow-csv
+    - ms-vscode-remote.remote-containers
+    - ms-vscode-remote.remote-ssh
+    - ms-vscode-remote.remote-ssh-edit
+    - ionutvmi.path-autocomplete
+    - vscodevim.vim
+    - IBM.output-colorizer
+    - redhat.vscode-yaml
+    - DavidAnson.vscode-markdownlint
+    - CoenraadS.bracket-pair-colorizer
+    # Frontend (JS)
     - msjsdiag.debugger-for-chrome
+    - dbaeumer.vscode-eslint
+    - joelday.docthis
+    - gogocrow.webpack-snippets
+    - eg2.vscode-npm-script
+    - michelemelluso.code-beautifier
+    # Python
+    - ms-python.python
+    - njpwerner.autodocstring
+    # Go
+    - ms-vscode.Go
+    - zxh404.vscode-proto3
+    # Infra
+    - aws-scripting-guy.cform
+    - mauve.terraform
+    - kddejong.vscode-cfn-lint
     - vscoss.vscode-ansible
+    - DanielThielking.aws-cloudformation-yaml
+    # Kubernetes
+    - ms-azuretools.vscode-docker
+    - ms-kubernetes-tools.vscode-kubernetes-tools
   when: item not in code_installed_list.stdout

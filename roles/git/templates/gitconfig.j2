@@ -1,15 +1,18 @@
 [user]
-  email = y.naruta@gmail.com
-  name = Yuichiro Naruta
-[core]
-  autocrlf = input
+	name = {{ git_username }}
+	email = {{ git_email }}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[color]
   editor = vim -c \"set fenc=utf-8\"
-  excludesfile = ~/.gitignore_global
-[push]
-  default = matching
+	ui = true
 [alias]
   l = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an %Creset%s %C(yellow)%d%Creset\"
-[filter "lfs"]
-  clean = git lfs clean %f
-  smudge = git lfs smudge %f
-  required = true
+[core]
+	autocrlf = false
+	quotepath = false
+[credential]
+	helper = osxkeychain

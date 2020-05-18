@@ -2,15 +2,17 @@
 - name: MacOS Local Provisioner
   hosts: localhost
   become: no
-  gather_facts: no
+  gather_facts: yes
   roles:
-    # App Installations
     - brew
-    # Configurations
-    - git
-    #- vim
+    - zsh
+    - role: git
+      vars:
+        git_username: Yuichiro Naruta
+        git_email: y.naruta@gmail.com
+    - go
+    - infra
+    - k8s
     - xenv
-    - bash
     - vscode
-    # macOS default
     - macos

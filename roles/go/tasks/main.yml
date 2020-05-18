@@ -1,0 +1,25 @@
+- name: install packages
+  homebrew:
+    name:
+      - go
+      - golangci-lint
+      - protobuf
+    state: present
+
+- name: create zshrc
+  file:
+    path: ~/.zshrc
+    state: touch
+    mode: 0600
+
+- name: add init command to zshrc
+  lineinfile:
+    dest: ~/.zshrc
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "# golang"
+    - "export GOPATH=$HOME/go"
+    - 'export GOROOT="$(brew --prefix golang)/libexec"'
+    - "export PATH=$PATH:$GOPATH/bin"
+    - "export GO111MODULE=on"

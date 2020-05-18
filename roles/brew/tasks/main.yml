@@ -18,15 +18,15 @@
     name:
       - mas
       - vim
-      - iperf
-      - wakeonlan
       - wget
       - coreutils
       - gzip
       - gawk
-      - heroku
       - jq
       - tree
+      - git
+      - git-lfs
+      - htop
     state: present
 
 - name: install homebrew packages with default name
@@ -53,35 +53,23 @@
     - wireshark
     - virtualbox
     - vagrant
-    - docker
-    - bathyscaphe
-    - cooviewer
-    - torbrowser
-    - vlc
     - xquartz
-    - vnc-viewer
     - bettertouchtool
-    - ibm-cloud-cli
-
+    - mattermost
+    - skitch
+    - typora
 #
 # mas
 #
-- name: mas get installed list
-  shell: mas list
-  register: mas_installed_list
-  changed_when: False
-  check_mode: no
-
-- name: mas install items
-  shell: "mas install {{ item }}"
-  with_items:
-    - 497799835 #Xcode
-    - 409203825 #Numbers
-    - 409183694 #Keynote
-    - 409201541 #Pages
-    - 715768417 #Microsoft Remote Desktop
-    - 803453959 #Slack
-  when: (item|string) not in mas_installed_list.stdout
-
-- name: mas upgrade
-  shell: "mas upgrade"
+#- name: mas get installed list
+#  shell: mas list
+#  register: mas_installed_list
+#  changed_when: False
+#  check_mode: no
+#
+#- name: mas install items
+#  shell: "mas install {{ item }}"
+#  with_items:
+#    - 803453959 #Slack
+#  when: (item|string) not in mas_installed_list.stdout
+#

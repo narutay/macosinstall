@@ -1,0 +1,36 @@
+- name: install packages
+  homebrew:
+    name:
+      - argocd
+      - helm
+      - istioctl
+      - kubectx
+      - kubernetes-cli
+      - kustomize
+      - skaffold
+      - stern
+    state: present
+
+- name: install homebrew cask packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker
+    - lens
+
+- name: create zshrc
+  file:
+    path: ~/.zshrc
+    state: touch
+    mode: 0600
+
+- name: add init command to zshrc
+  lineinfile:
+    dest: ~/.zshrc
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "# kubernetes"
+    - 'alias k="kubectl"'
+    - "source <(kubectl completion zsh)"

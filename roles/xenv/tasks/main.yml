@@ -8,13 +8,19 @@
       - nodenv
     state: present
 
-- name: add init command to bash_profile
+- name: create zshrc
+  file:
+    path: ~/.zshrc
+    state: touch
+    mode: 0600
+
+- name: add init command to zshrc
   lineinfile:
-    dest: ~/.bash_profile
+    dest: ~/.zshrc
     line: "{{ item }}"
     state: present
   with_items:
     - "#pyenv"
-    - "eval \"$(pyenv init -)\""
+    - 'eval "$(pyenv init -)"'
     - "#nodeenv"
-    - "eval \"$(nodenv init -)\""
+    - 'eval "$(nodenv init -)"'
